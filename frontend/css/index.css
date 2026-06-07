@@ -1,0 +1,160 @@
+/* === ГЛАВНЫЙ ЭКРАН === */
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 30px 0;
+  border-bottom: 2px solid var(--accent);
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #a60000;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+/* Основной блок */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 0;
+}
+
+.buttons {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Кнопка "для парня" */
+.btn-male {
+  background: var(--surface);
+  border: 2px solid #2196f3;
+  color: #fff;
+  font-weight: 700;
+  padding: 18px 32px;
+  border-radius: var(--radius-btn);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: var(--font);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-male::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #2196f3;
+}
+
+.btn-male:hover {
+  background: #2196f3;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(33, 150, 243, 0.3);
+}
+
+.btn-male:active {
+  transform: scale(0.98);
+}
+
+/* Кнопка "для девушки" */
+.btn-female {
+  background: var(--surface);
+  border: 2px solid #e91e90;
+  color: #fff;
+  font-weight: 700;
+  padding: 18px 32px;
+  border-radius: var(--radius-btn);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: var(--font);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-female::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #e91e90;
+}
+
+.btn-female:hover {
+  background: #e91e90;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(233, 30, 144, 0.3);
+}
+
+.btn-female:active {
+  transform: scale(0.98);
+}
+
+/* Подсказка */
+.hint {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  min-height: 1.5em;
+  transition: color var(--transition);
+}
+
+.hint--active {
+  color: var(--accent);
+}
+
+/* Футер */
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-top: 1px solid #1f1f1f;
+  margin-top: 40px;
+}
+
+@media (max-width: 700px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .buttons {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .btn-male,
+  .btn-female {
+    font-size: 1rem;
+    padding: 16px 24px;
+  }
+}

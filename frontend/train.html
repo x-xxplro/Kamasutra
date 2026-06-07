@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>IRON TRAINING — Тренировка</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/train.css">
+</head>
+<body>
+<div class="container">
+  <div class="train-header">
+    <a href="index.html" class="back-link">&larr; На главную</a>
+    <h1 id="train-title">Загрузка...</h1>
+    <div class="train-subtitle" id="train-subtitle"></div>
+  </div>
+
+  <div class="day-nav">
+    <button class="nav-btn" id="btn-prev">&larr;</button>
+    <span class="current-date" id="current-date"></span>
+    <button class="nav-btn" id="btn-next">&rarr;</button>
+  </div>
+
+  <div id="train-content">
+    <div class="loading"><div class="spinner"></div><div>Загрузка программы...</div></div>
+  </div>
+
+  <div class="check-section">
+    <button class="btn-check" id="btn-check" disabled>ОТМЕТИТЬ ВЫПОЛНЕНИЕ</button>
+    <p class="check-hint" id="check-hint"></p>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/router.js"></script>
+<script src="js/api.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/train.js"></script>
+</body>
+</html>
