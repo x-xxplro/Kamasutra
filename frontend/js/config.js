@@ -2,8 +2,8 @@
  * config.js — Глобальные константы
  */
 const CONFIG = {
-  // API — порт бэкенда 3000
-  API_BASE_URL: 'http://localhost:3000',
+  // API — автоматически на том же домене/порту, что и фронт
+  API_BASE_URL: window.location.origin,
 
   // Дата старта программы
   START_DATE: new Date('2026-07-01'),
