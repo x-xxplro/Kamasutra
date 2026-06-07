@@ -6,7 +6,8 @@ const { exec } = require('child_process'); // ДЛЯ ОТКРЫТИЯ БРАУЗ
 
 // --------------------- CONFIG ---------------------
 const PORT = process.env.PORT || 3000;
-const DATA_DIR = path.resolve(process.env.DATA_DIR || './data');
+// ИСПРАВЛЕНО: ищем данные в папке backend/data
+const DATA_DIR = path.resolve(__dirname, 'data');
 const FRONTEND_DIR = path.resolve(__dirname, '../frontend');
 
 // --------------------- LOGGING ---------------------
