@@ -1,5 +1,5 @@
 {
-  "name": "fitness-project",
+  "name": "kamasutra-backend",
   "version": "1.0.0",
   "description": "Fitness training project with exercises and GIFs",
   "main": "server.js",
