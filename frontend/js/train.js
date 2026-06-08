@@ -1,18 +1,15 @@
 /**
- * train.js — Основная логика экрана тренировки
- * Показывает один день, навигация стрелками, отметка каждого дня
+ * train.js — Один день, отметка выполнения, автопереход, открытие первого невыполненного дня
  */
 (function () {
   'use strict';
 
-  // Состояние
   let programType = null;
   let currentDate = null;
   let currentWeek = null;
   let programData = null;
   let currentDayData = null;
 
-  // DOM
   const trainTitle = document.getElementById('train-title');
   const trainSubtitle = document.getElementById('train-subtitle');
   const currentDateEl = document.getElementById('current-date');
@@ -30,9 +27,41 @@
       return;
     }
 
-    // Всегда стартуем с 1 июля 2026
-    currentDate = calendar.normalize(CONFIG.START_DATE);
-    currentWeek = 1;
+    const start = calendar.normalize(CONFIG.START_DATE);
+    const today = calendar.getToday();
+
+    // Начинаем с 1 июля
+    currentDate = new Date(start);
+
+    // Идём вперёд, пока не найдём невыполненный день
+    while (currentDate <= today) {
+      // Пропускаем воскресенья
+      if (calendar.isSunday(currentDate)) {
+        currentDate = calendar.addDays(currentDate, 1);
+        continue;
+      }
+
+      // Проверяем, выполнен ли этот день
+      const completed = storage.getCompletion(programType, currentDate);
+
+      if (completed !== true) {
+        // Нашли! Это первый невыполненный день
+        break;
+      }
+
+      // Выполнен — идём дальше
+      currentDate = calendar.addDays(currentDate, 1);
+    }
+
+    // Если вышли за today — все дни выполнены
+    if (currentDate > today) {
+      currentDate = new Date(today);
+      if (calendar.isSunday(currentDate)) {
+        currentDate = calendar.addDays(currentDate, -1);
+      }
+    }
+
+    currentWeek = calendar.getWeekNumber(currentDate);
 
     btnPrev.addEventListener('click', () => navigateDay(-1));
     btnNext.addEventListener('click', () => navigateDay(1));
@@ -148,7 +177,6 @@
 
     btnCheck.style.display = 'inline-block';
 
-    // Дата до старта
     if (currentDate < start) {
       btnCheck.disabled = true;
       btnCheck.textContent = 'ОТМЕТИТЬ ВЫПОЛНЕНИЕ';
@@ -157,7 +185,6 @@
       return;
     }
 
-    // Будущая дата — нельзя отметить
     if (currentDate > today) {
       btnCheck.disabled = true;
       btnCheck.textContent = 'ОТМЕТИТЬ ВЫПОЛНЕНИЕ';
@@ -166,19 +193,20 @@
       return;
     }
 
-    // Можно отмечать (сегодня или прошлое)
-    btnCheck.disabled = false;
-    checkHint.textContent = '';
-
     const completed = storage.getCompletion(programType, currentDate);
 
     if (completed === true) {
+      btnCheck.disabled = true;
       btnCheck.textContent = 'ВЫПОЛНЕНО';
       btnCheck.className = 'btn-check btn-check--done';
-    } else {
-      btnCheck.textContent = 'ОТМЕТИТЬ ВЫПОЛНЕНИЕ';
-      btnCheck.className = 'btn-check';
+      checkHint.textContent = '';
+      return;
     }
+
+    btnCheck.disabled = false;
+    btnCheck.textContent = 'ОТМЕТИТЬ ВЫПОЛНЕНИЕ';
+    btnCheck.className = 'btn-check';
+    checkHint.textContent = '';
   }
 
   function toggleCompletion() {
@@ -189,13 +217,17 @@
 
     const completed = storage.getCompletion(programType, currentDate);
 
-    if (completed === true) {
-      storage.removeCompletion(programType, currentDate);
-    } else {
-      storage.setCompletion(programType, currentDate, true);
-    }
+    // Уже отмечено — выходим
+    if (completed === true) return;
 
+    // Отмечаем
+    storage.setCompletion(programType, currentDate, true);
     updateCheckButton();
+
+    // Автопереход на следующий день через 1 секунду
+    setTimeout(() => {
+      navigateDay(1);
+    }, 1000);
   }
 
   function escapeHtml(str) {
@@ -205,7 +237,6 @@
     return div.innerHTML;
   }
 
-  // Свайпы
   let touchStartX = 0;
   document.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
@@ -219,7 +250,6 @@
     }
   });
 
-  // Клавиши
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') navigateDay(-1);
     if (e.key === 'ArrowRight') navigateDay(1);
