@@ -1,23 +1,35 @@
 /* === ГЛАВНЫЙ ЭКРАН === */
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Заголовок */
 .header {
   text-align: center;
-  margin-bottom: 50px;
-  padding: 30px 0;
-  border-bottom: 2px solid var(--accent);
+  margin-bottom: 30px;
+  padding: 30px 0 20px;
+  border-bottom: 2px solid #cc0000;
 }
 
 .header h1 {
   font-size: 3rem;
   font-weight: 800;
   letter-spacing: 3px;
-  color: #a60000;
+  color: #cc0000;
   text-transform: uppercase;
   margin-bottom: 10px;
 }
 
 .subtitle {
-  color: var(--text-secondary);
+  color: #aaa;
   font-size: 0.95rem;
   margin-top: 8px;
 }
@@ -30,7 +42,7 @@
   align-items: center;
   justify-content: center;
   gap: 30px;
-  padding: 40px 0;
+  padding: 20px 0;
 }
 
 .buttons {
@@ -41,20 +53,20 @@
   gap: 20px;
 }
 
-/* Кнопка "для парня" */
+/* Кнопка "Кринжулька" */
 .btn-male {
-  background: var(--surface);
+  background: #111;
   border: 2px solid #2196f3;
   color: #fff;
   font-weight: 700;
   padding: 18px 32px;
-  border-radius: var(--radius-btn);
+  border-radius: 40px;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: all 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-family: var(--font);
+  font-family: 'Segoe UI', sans-serif;
   position: relative;
   overflow: hidden;
 }
@@ -80,20 +92,20 @@
   transform: scale(0.98);
 }
 
-/* Кнопка "для девушки" */
+/* Кнопка "Злюка" */
 .btn-female {
-  background: var(--surface);
+  background: #111;
   border: 2px solid #e91e90;
   color: #fff;
   font-weight: 700;
   padding: 18px 32px;
-  border-radius: var(--radius-btn);
+  border-radius: 40px;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: all 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-family: var(--font);
+  font-family: 'Segoe UI', sans-serif;
   position: relative;
   overflow: hidden;
 }
@@ -122,24 +134,24 @@
 /* Подсказка */
 .hint {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: #aaa;
   text-align: center;
   min-height: 1.5em;
-  transition: color var(--transition);
+  transition: color 0.2s;
 }
 
 .hint--active {
-  color: var(--accent);
+  color: #cc0000;
 }
 
 /* Футер */
 .footer {
   text-align: center;
-  padding: 30px 0;
-  color: var(--text-muted);
+  padding: 14px 0;
+  color: #555;
   font-size: 0.8rem;
   border-top: 1px solid #1f1f1f;
-  margin-top: 40px;
+  margin-top: 0;
 }
 
 @media (max-width: 700px) {
